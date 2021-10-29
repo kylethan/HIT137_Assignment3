@@ -1,0 +1,9 @@
+Unzip all files and keep them in the same directory.
+
+
+
+Controls:
+1. Arrows key for movement
+2. Spacebar for jumping
+3. N key for next stage
+4. Q key to interact with objects
