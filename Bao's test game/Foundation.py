@@ -20,7 +20,7 @@ run_ani_R = [pygame.image.load("Knight_01__IDLE_000.png"), pygame.image.load("Kn
              pygame.image.load("Knight_01__RUN_009.png")]
 #Resize the image
 run_ani_R_scaled = []
-for i in run_ani_R
+for i in run_ani_R:
     k = pygame.transform.scale(i, (450, 250))
     run_ani_R_scaled.append(k)
 
