@@ -8,16 +8,16 @@ from tkinter import *
 
 #Game Options
 font_used = "arial"
-main_char = 0
-main_char_pic = ["Knight_01__IDLE_000.png"]
+num = 1
+
 #Game Resources
 # Run animation for the RIGHT for three characters
 #Char 1
-run_ani_R = [pygame.image.load("Knight_01__IDLE_000.png"), pygame.image.load("Knight_01__RUN_000.png"), pygame.image.load("Knight_01__RUN_001.png"),
-             pygame.image.load("Knight_01__RUN_002.png"), pygame.image.load("Knight_01__RUN_003.png"), pygame.image.load("Knight_01__RUN_004.png"),
-             pygame.image.load("Knight_01__RUN_005.png"), pygame.image.load("Knight_01__RUN_006.png"),
-             pygame.image.load("Knight_01__RUN_007.png"), pygame.image.load("Knight_01__RUN_008.png"),
-             pygame.image.load("Knight_01__RUN_009.png")]
+run_ani_R = [pygame.image.load(f"Knight_0{num}__IDLE_000.png"), pygame.image.load(f"Knight_0{num}__RUN_000.png"), pygame.image.load(f"Knight_0{num}__RUN_001.png"),
+             pygame.image.load(f"Knight_0{num}__RUN_002.png"), pygame.image.load(f"Knight_0{num}__RUN_003.png"), pygame.image.load(f"Knight_0{num}__RUN_004.png"),
+             pygame.image.load(f"Knight_0{num}__RUN_005.png"), pygame.image.load(f"Knight_0{num}__RUN_006.png"),
+             pygame.image.load(f"Knight_0{num}__RUN_007.png"), pygame.image.load(f"Knight_0{num}__RUN_008.png"),
+             pygame.image.load(f"Knight_0{num}__RUN_009.png")]
 #Resize the image
 run_ani_R_scaled = []
 for i in run_ani_R:
@@ -152,7 +152,7 @@ class Ground(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load(main_char_pic[main_char])
+        self.image = pygame.image.load(f"Knight_0{num}__IDLE_000.png")
         self.image = pygame.transform.scale(self.image, (450, 250))
         self.rect = self.image.get_rect()
         # Position and direction
