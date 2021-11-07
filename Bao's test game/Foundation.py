@@ -6,6 +6,9 @@ import random
 from tkinter import filedialog
 from tkinter import *
 
+#Game Options
+font_used = "arial"
+#Game Resources
 # Run animation for the RIGHT
 run_ani_R = [pygame.image.load("Knight_01__IDLE_000.png"), pygame.image.load("Knight_01__RUN_000.png"), pygame.image.load("Knight_01__RUN_001.png"),
              pygame.image.load("Knight_01__RUN_002.png"), pygame.image.load("Knight_01__RUN_003.png"), pygame.image.load("Knight_01__RUN_004.png"),
@@ -83,12 +86,40 @@ FRIC = -0.10
 FPS = 60
 FPS_CLOCK = pygame.time.Clock()
 COUNT = 0
-
-#Set Display
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption("Welcome to the World")
 
 #required class
+class Game:
+    def __init__(self):
+        self.font_name = pygame.font.match_font(font_used)
+        pygame.display.set_caption("Welcome to the World")
+        self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
+
+    #Print text to the screen knowing attributes, including position
+    def draw_text(self, text, size, color, x, y):
+        font = pygame.font.Font(self.font_name, size)
+        text_surface = font.render(text, True, color)
+        text_rect = text_surface.get_rect()
+        text_rect.midtop = (x, y)
+        self.screen.blit(text_surface, text_rect)
+    def welcome(self):
+        self.screen.fill("LIGHTBLUE")
+        self.draw_text("The Heroes", 48, "Black", WIDTH/2, HEIGHT/4)
+        self.draw_text("Choose your characters by Pressing 1, 2 or 3", 22, "Black", WIDTH/2, HEIGHT/2)
+        pygame.display.flip()
+        self.wait_for_press()
+
+     #Press key to start playing and skip waiting screen
+    def wait_for_press(self):
+        self.waiting = True
+        while self.waiting:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.waiting = False
+                if event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_SPACE:
+                        self.waiting = False
+
 class Background(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -97,6 +128,7 @@ class Background(pygame.sprite.Sprite):
 
     def render(self):
         displaysurface.blit(self.imgbg, (0, 0))
+
 
 class Ground(pygame.sprite.Sprite):
     def __init__(self):
@@ -234,13 +266,15 @@ class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
+game_start = Game()
 background = Background()
 ground = Ground()
 ground_group = pygame.sprite.Group()
 ground_group.add(ground)
 player = Player()
+game_start.welcome()
 
-while True:
+while game_start.waiting == False:
     for event in pygame.event.get():
         # Will run when the close window button is clicked
         if event.type == QUIT:
