@@ -8,8 +8,11 @@ from tkinter import *
 
 #Game Options
 font_used = "arial"
+main_char = 0
+main_char_pic = ["Knight_01__IDLE_000.png"]
 #Game Resources
-# Run animation for the RIGHT
+# Run animation for the RIGHT for three characters
+#Char 1
 run_ani_R = [pygame.image.load("Knight_01__IDLE_000.png"), pygame.image.load("Knight_01__RUN_000.png"), pygame.image.load("Knight_01__RUN_001.png"),
              pygame.image.load("Knight_01__RUN_002.png"), pygame.image.load("Knight_01__RUN_003.png"), pygame.image.load("Knight_01__RUN_004.png"),
              pygame.image.load("Knight_01__RUN_005.png"), pygame.image.load("Knight_01__RUN_006.png"),
@@ -17,7 +20,7 @@ run_ani_R = [pygame.image.load("Knight_01__IDLE_000.png"), pygame.image.load("Kn
              pygame.image.load("Knight_01__RUN_009.png")]
 #Resize the image
 run_ani_R_scaled = []
-for i in run_ani_R:
+for i in run_ani_R
     k = pygame.transform.scale(i, (450, 250))
     run_ani_R_scaled.append(k)
 
@@ -75,8 +78,10 @@ jump_ani_up_L_scaled = []
 for i in jump_ani_up_L:
     k = pygame.transform.scale(i, (450, 250))
     jump_ani_up_L_scaled.append(k)
-#Start the game
 
+
+
+#Start the game
 pygame.init()
 vec = pygame.math.Vector2
 HEIGHT = 600
@@ -92,9 +97,11 @@ displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 class Game:
     def __init__(self):
         self.font_name = pygame.font.match_font(font_used)
-        pygame.display.set_caption("Welcome to the World")
+        pygame.display.set_caption("Welcome to the World of Endless Fights")
         self.screen = pygame.display.set_mode((WIDTH, HEIGHT))
-
+        #Add welcome background
+        self.welcome_background = pygame.image.load("welcome_wallpaper.png")
+        self.screen.blit(self.welcome_background, (0, 0))
     #Print text to the screen knowing attributes, including position
     def draw_text(self, text, size, color, x, y):
         font = pygame.font.Font(self.font_name, size)
@@ -103,9 +110,8 @@ class Game:
         text_rect.midtop = (x, y)
         self.screen.blit(text_surface, text_rect)
     def welcome(self):
-        self.screen.fill("LIGHTBLUE")
-        self.draw_text("The Heroes", 48, "Black", WIDTH/2, HEIGHT/4)
-        self.draw_text("Choose your characters by Pressing 1, 2 or 3", 22, "Black", WIDTH/2, HEIGHT/2)
+        self.draw_text("Armor and Earth", 60, "Black", WIDTH/2, HEIGHT/8)
+        self.draw_text("Choose your Knight by Pressing 1, 2 or 3", 26, "Black", WIDTH/2, HEIGHT/2.7)
         pygame.display.flip()
         self.wait_for_press()
 
@@ -116,6 +122,8 @@ class Game:
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.waiting = False
+                    pygame.quit()
+                    sys.exit()
                 if event.type == pygame.KEYDOWN:
                     if event.key == pygame.K_SPACE:
                         self.waiting = False
@@ -144,7 +152,7 @@ class Ground(pygame.sprite.Sprite):
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.image = pygame.image.load("Knight_01__IDLE_000.png")
+        self.image = pygame.image.load(main_char_pic[main_char])
         self.image = pygame.transform.scale(self.image, (450, 250))
         self.rect = self.image.get_rect()
         # Position and direction
