@@ -57,7 +57,7 @@ for i in attack_ani_L:
     k = pygame.transform.scale(i, (450, 250))
     attack_ani_L_scaled.append(k)
 
-# Jump animation for the jump up
+# Jump animation for the right jump up
 jump_ani_up = [pygame.image.load("Knight_01__JUMP_007.png"), pygame.image.load("Knight_01__JUMP_008.png"), pygame.image.load("Knight_01__JUMP_009.png")]
 #Resize the image
 jump_ani_up_scaled = []
@@ -65,7 +65,13 @@ for i in jump_ani_up:
     k = pygame.transform.scale(i, (450, 250))
     jump_ani_up_scaled.append(k)
 
-
+# Jump animation for the left jump up
+jump_ani_up_L = [pygame.image.load("Knight_01__JUMP_007_L.png"), pygame.image.load("Knight_01__JUMP_008_L.png"), pygame.image.load("Knight_01__JUMP_009_L.png")]
+#Resize the image
+jump_ani_up_L_scaled = []
+for i in jump_ani_up_L:
+    k = pygame.transform.scale(i, (450, 250))
+    jump_ani_up_L_scaled.append(k)
 #Start the game
 
 pygame.init()
@@ -207,7 +213,10 @@ class Player(pygame.sprite.Sprite):
             self.jump_frame = 0
             self.jumping = False
         # Check direction for correct animation to display
-        self.image = jump_ani_up_scaled[self.jump_frame]
+        if self.direction == "RIGHT":
+            self.image = jump_ani_up_scaled[self.jump_frame]
+        if self.direction == "LEFT":
+            self.image = jump_ani_up_L_scaled[self.jump_frame]
         # Update the current attack frame
         self.jump_frame += 1
 
