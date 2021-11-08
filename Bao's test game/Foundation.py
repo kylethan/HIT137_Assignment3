@@ -9,79 +9,7 @@ from tkinter import *
 #Game Options
 font_used = "arial"
 num = 1
-
-#Game Resources
-# Run animation for the RIGHT for three characters
-#Char 1
-run_ani_R = [pygame.image.load(f"Knight_0{num}__IDLE_000.png"), pygame.image.load(f"Knight_0{num}__RUN_000.png"), pygame.image.load(f"Knight_0{num}__RUN_001.png"),
-             pygame.image.load(f"Knight_0{num}__RUN_002.png"), pygame.image.load(f"Knight_0{num}__RUN_003.png"), pygame.image.load(f"Knight_0{num}__RUN_004.png"),
-             pygame.image.load(f"Knight_0{num}__RUN_005.png"), pygame.image.load(f"Knight_0{num}__RUN_006.png"),
-             pygame.image.load(f"Knight_0{num}__RUN_007.png"), pygame.image.load(f"Knight_0{num}__RUN_008.png"),
-             pygame.image.load(f"Knight_0{num}__RUN_009.png")]
-#Resize the image
-run_ani_R_scaled = []
-for i in run_ani_R:
-    k = pygame.transform.scale(i, (450, 250))
-    run_ani_R_scaled.append(k)
-
-# Run animation for the LEFT
-run_ani_L = [pygame.image.load("Knight_01__IDLE_000_L.png"), pygame.image.load("Knight_01__RUN_000_L.png"), pygame.image.load("Knight_01__RUN_001_L.png"),
-             pygame.image.load("Knight_01__RUN_002_L.png"), pygame.image.load("Knight_01__RUN_003_L.png"), pygame.image.load("Knight_01__RUN_004_L.png"),
-             pygame.image.load("Knight_01__RUN_005_L.png"), pygame.image.load("Knight_01__RUN_006_L.png"),
-             pygame.image.load("Knight_01__RUN_007_L.png"), pygame.image.load("Knight_01__RUN_008_L.png"),
-             pygame.image.load("Knight_01__RUN_009_L.png")]
-#Resize the image
-run_ani_L_scaled = []
-for i in run_ani_L:
-    k = pygame.transform.scale(i, (450, 250))
-    run_ani_L_scaled.append(k)
-
-# Attack animation for the RIGHT
-attack_ani_R = [pygame.image.load("Knight_01__IDLE_000.png"), pygame.image.load("Knight_01__ATTACK_000.png"),
-                pygame.image.load("Knight_01__ATTACK_001.png"), pygame.image.load("Knight_01__ATTACK_002.png"),
-                pygame.image.load("Knight_01__ATTACK_003.png"), pygame.image.load("Knight_01__ATTACK_004.png"),
-                pygame.image.load("Knight_01__ATTACK_005.png"), pygame.image.load("Knight_01__ATTACK_006.png"),
-                pygame.image.load("Knight_01__ATTACK_007.png"), pygame.image.load("Knight_01__ATTACK_008.png"),
-                pygame.image.load("Knight_01__ATTACK_009.png"), pygame.image.load("Knight_01__IDLE_000.png")]
-
-#Resize the image
-attack_ani_R_scaled = []
-for i in attack_ani_R:
-    k = pygame.transform.scale(i, (450, 250))
-    attack_ani_R_scaled.append(k)
-
-# Attack animation for the LEFT
-attack_ani_L = [pygame.image.load("Knight_01__IDLE_000_L.png"), pygame.image.load("Knight_01__ATTACK_000_L.png"),
-                pygame.image.load("Knight_01__ATTACK_001_L.png"), pygame.image.load("Knight_01__ATTACK_002_L.png"),
-                pygame.image.load("Knight_01__ATTACK_003_L.png"), pygame.image.load("Knight_01__ATTACK_004_L.png"),
-                pygame.image.load("Knight_01__ATTACK_005_L.png"), pygame.image.load("Knight_01__ATTACK_006_L.png"),
-                pygame.image.load("Knight_01__ATTACK_007_L.png"), pygame.image.load("Knight_01__ATTACK_008_L.png"),
-                pygame.image.load("Knight_01__ATTACK_009_L.png"), pygame.image.load("Knight_01__IDLE_000_L.png")]
-#Resize the image
-attack_ani_L_scaled = []
-for i in attack_ani_L:
-    k = pygame.transform.scale(i, (450, 250))
-    attack_ani_L_scaled.append(k)
-
-# Jump animation for the right jump up
-jump_ani_up = [pygame.image.load("Knight_01__JUMP_007.png"), pygame.image.load("Knight_01__JUMP_008.png"), pygame.image.load("Knight_01__JUMP_009.png")]
-#Resize the image
-jump_ani_up_scaled = []
-for i in jump_ani_up:
-    k = pygame.transform.scale(i, (450, 250))
-    jump_ani_up_scaled.append(k)
-
-# Jump animation for the left jump up
-jump_ani_up_L = [pygame.image.load("Knight_01__JUMP_007_L.png"), pygame.image.load("Knight_01__JUMP_008_L.png"), pygame.image.load("Knight_01__JUMP_009_L.png")]
-#Resize the image
-jump_ani_up_L_scaled = []
-for i in jump_ani_up_L:
-    k = pygame.transform.scale(i, (450, 250))
-    jump_ani_up_L_scaled.append(k)
-
-
-
-#Start the game
+#Game_Parameters
 pygame.init()
 vec = pygame.math.Vector2
 HEIGHT = 600
@@ -93,7 +21,7 @@ FPS_CLOCK = pygame.time.Clock()
 COUNT = 0
 displaysurface = pygame.display.set_mode((WIDTH, HEIGHT))
 
-#required class
+#Welcome_to_the_game
 class Game:
     def __init__(self):
         self.font_name = pygame.font.match_font(font_used)
@@ -117,6 +45,7 @@ class Game:
 
      #Press key to start playing and skip waiting screen
     def wait_for_press(self):
+        global num
         self.waiting = True
         while self.waiting:
             for event in pygame.event.get():
@@ -125,9 +54,89 @@ class Game:
                     pygame.quit()
                     sys.exit()
                 if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
+                    if event.key == pygame.K_1:
+                        num = 1
+                        self.waiting = False
+                    elif event.key == pygame.K_2:
+                        num = 2
+                        self.waiting = False
+                    elif event.key == pygame.K_3:
+                        num = 3
                         self.waiting = False
 
+game_start = Game()
+game_start.welcome()
+
+#Game Resources
+# Run animation for the RIGHT for three characters
+#Char 1
+run_ani_R = [pygame.image.load(f"Knight_0{num}__IDLE_000.png"), pygame.image.load(f"Knight_0{num}__RUN_000.png"), pygame.image.load(f"Knight_0{num}__RUN_001.png"),
+             pygame.image.load(f"Knight_0{num}__RUN_002.png"), pygame.image.load(f"Knight_0{num}__RUN_003.png"), pygame.image.load(f"Knight_0{num}__RUN_004.png"),
+             pygame.image.load(f"Knight_0{num}__RUN_005.png"), pygame.image.load(f"Knight_0{num}__RUN_006.png"),
+             pygame.image.load(f"Knight_0{num}__RUN_007.png"), pygame.image.load(f"Knight_0{num}__RUN_008.png"),
+             pygame.image.load(f"Knight_0{num}__RUN_009.png")]
+#Resize the image
+run_ani_R_scaled = []
+for i in run_ani_R:
+    k = pygame.transform.scale(i, (450, 250))
+    run_ani_R_scaled.append(k)
+
+# Run animation for the LEFT
+run_ani_L = [pygame.image.load(f"Knight_0{num}__IDLE_000_L.png"), pygame.image.load(f"Knight_0{num}__RUN_000_L.png"), pygame.image.load(f"Knight_0{num}__RUN_001_L.png"),
+             pygame.image.load(f"Knight_0{num}__RUN_002_L.png"), pygame.image.load(f"Knight_0{num}__RUN_003_L.png"), pygame.image.load(f"Knight_0{num}__RUN_004_L.png"),
+             pygame.image.load(f"Knight_0{num}__RUN_005_L.png"), pygame.image.load(f"Knight_0{num}__RUN_006_L.png"),
+             pygame.image.load(f"Knight_0{num}__RUN_007_L.png"), pygame.image.load(f"Knight_0{num}__RUN_008_L.png"),
+             pygame.image.load(f"Knight_0{num}__RUN_009_L.png")]
+#Resize the image
+run_ani_L_scaled = []
+for i in run_ani_L:
+    k = pygame.transform.scale(i, (450, 250))
+    run_ani_L_scaled.append(k)
+
+# Attack animation for the RIGHT
+attack_ani_R = [pygame.image.load(f"Knight_0{num}__IDLE_000.png"), pygame.image.load(f"Knight_0{num}__ATTACK_000.png"),
+                pygame.image.load(f"Knight_0{num}__ATTACK_001.png"), pygame.image.load(f"Knight_0{num}__ATTACK_002.png"),
+                pygame.image.load(f"Knight_0{num}__ATTACK_003.png"), pygame.image.load(f"Knight_0{num}__ATTACK_004.png"),
+                pygame.image.load(f"Knight_0{num}__ATTACK_005.png"), pygame.image.load(f"Knight_0{num}__ATTACK_006.png"),
+                pygame.image.load(f"Knight_0{num}__ATTACK_007.png"), pygame.image.load(f"Knight_0{num}__ATTACK_008.png"),
+                pygame.image.load(f"Knight_0{num}__ATTACK_009.png"), pygame.image.load(f"Knight_0{num}__IDLE_000.png")]
+
+#Resize the image
+attack_ani_R_scaled = []
+for i in attack_ani_R:
+    k = pygame.transform.scale(i, (450, 250))
+    attack_ani_R_scaled.append(k)
+
+# Attack animation for the LEFT
+attack_ani_L = [pygame.image.load(f"Knight_0{num}__IDLE_000_L.png"), pygame.image.load(f"Knight_0{num}__ATTACK_000_L.png"),
+                pygame.image.load(f"Knight_0{num}__ATTACK_001_L.png"), pygame.image.load(f"Knight_0{num}__ATTACK_002_L.png"),
+                pygame.image.load(f"Knight_0{num}__ATTACK_003_L.png"), pygame.image.load(f"Knight_0{num}__ATTACK_004_L.png"),
+                pygame.image.load(f"Knight_0{num}__ATTACK_005_L.png"), pygame.image.load(f"Knight_0{num}__ATTACK_006_L.png"),
+                pygame.image.load(f"Knight_0{num}__ATTACK_007_L.png"), pygame.image.load(f"Knight_0{num}__ATTACK_008_L.png"),
+                pygame.image.load(f"Knight_0{num}__ATTACK_009_L.png"), pygame.image.load(f"Knight_0{num}__IDLE_000_L.png")]
+#Resize the image
+attack_ani_L_scaled = []
+for i in attack_ani_L:
+    k = pygame.transform.scale(i, (450, 250))
+    attack_ani_L_scaled.append(k)
+
+# Jump animation for the right jump up
+jump_ani_up = [pygame.image.load(f"Knight_0{num}__JUMP_007.png"), pygame.image.load(f"Knight_0{num}__JUMP_008.png"), pygame.image.load(f"Knight_0{num}__JUMP_009.png")]
+#Resize the image
+jump_ani_up_scaled = []
+for i in jump_ani_up:
+    k = pygame.transform.scale(i, (450, 250))
+    jump_ani_up_scaled.append(k)
+
+# Jump animation for the left jump up
+jump_ani_up_L = [pygame.image.load(f"Knight_0{num}__JUMP_007_L.png"), pygame.image.load(f"Knight_0{num}__JUMP_008_L.png"), pygame.image.load(f"Knight_0{num}__JUMP_009_L.png")]
+#Resize the image
+jump_ani_up_L_scaled = []
+for i in jump_ani_up_L:
+    k = pygame.transform.scale(i, (450, 250))
+    jump_ani_up_L_scaled.append(k)
+
+#Game_play class
 class Background(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
@@ -274,13 +283,12 @@ class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
 
-game_start = Game()
+
 background = Background()
 ground = Ground()
 ground_group = pygame.sprite.Group()
 ground_group.add(ground)
 player = Player()
-game_start.welcome()
 
 while game_start.waiting == False:
     for event in pygame.event.get():
@@ -288,10 +296,6 @@ while game_start.waiting == False:
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
-
-            # For events that occur upon clicking the mouse (left click)
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            pass
 
         # Event handling for a range of different key presses
         if event.type == pygame.KEYDOWN:

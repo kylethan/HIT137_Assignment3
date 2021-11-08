@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bcb8562-cd44-47c9-b9d2-f0e1dc21eb5d" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Bao's test game/Foundation.py" beforeDir="false" afterPath="$PROJECT_DIR$/Bao's test game/Foundation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Bao's test game/welcome_wallpaper.png" beforeDir="false" afterPath="$PROJECT_DIR$/Bao's test game/welcome_wallpaper.png" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
