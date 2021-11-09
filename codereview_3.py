@@ -121,8 +121,7 @@ class Item(pygame.sprite.Sprite):
                   if self.type == 2:
                         handler.money += 1
                         self.kill()
-                        
-
+                     
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):

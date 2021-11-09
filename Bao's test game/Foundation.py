@@ -282,10 +282,46 @@ class Player(pygame.sprite.Sprite):
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
+        self.image = pygame.image.load("Enemy.png")
+        self.rect = self.image.get_rect()     
+        self.pos = vec(0,0)
+        self.vel = vec(0,0)
+
+        self.direction = random.randint(0,1) # 0 for Right, 1 for Left
+        self.vel.x = random.randint(2,6) / 2  # Randomized velocity of the generated enemy 
+
+        # Sets the intial position of the enemy
+        if self.direction == 0:
+            self.pos.x = 0
+            self.pos.y = 440
+        if self.direction == 1:
+            self.pos.x = 500
+            self.pos.y = 440
+    
+    def move(self):
+        
+        # Causes the enemy to change directions upon reaching the end of screen    
+        if self.pos.x >= (WIDTH-20):
+                self.direction = 1
+        elif self.pos.x <= 0:
+                self.direction = 0
+
+        # Updates position with new values     
+        if self.direction == 0:
+            self.pos.x += self.vel.x
+        if self.direction == 1:
+            self.pos.x -= self.vel.x
+ 
+        self.rect.center = self.pos # Updates rect
+
+    def render(self):
+        # Displayed the enemy on screen
+        displaysurface.blit(self.image, (self.pos.x, self.pos.y))
 
 
 background = Background()
 ground = Ground()
+enemy = Enemy()
 ground_group = pygame.sprite.Group()
 ground_group.add(ground)
 player = Player()
@@ -314,6 +350,7 @@ while game_start.waiting == False:
         player.attack()
     player.move()
     displaysurface.blit(player.image, player.rect)
+    enemy.render()
     pygame.display.update()
     FPS_CLOCK.tick(FPS)
     player.gravity_check()
