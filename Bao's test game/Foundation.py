@@ -351,6 +351,7 @@ while game_start.waiting == False:
     player.move()
     displaysurface.blit(player.image, player.rect)
     enemy.render()
+    enemy.move()
     pygame.display.update()
     FPS_CLOCK.tick(FPS)
     player.gravity_check()
