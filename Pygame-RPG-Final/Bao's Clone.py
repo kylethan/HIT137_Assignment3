@@ -896,7 +896,7 @@ class Cursor(pygame.sprite.Sprite):
 class PButton(pygame.sprite.Sprite):
       def __init__(self):
             super().__init__()
-            self.vec = vec(620, 300)
+            self.vec = vec(700, 20)
             self.imgdisp = 0
 
       def render(self, num):
