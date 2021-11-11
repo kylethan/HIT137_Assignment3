@@ -114,7 +114,7 @@ run_ani_R = [pygame.image.load(f"Knight_0{num}__IDLE_000.png"), pygame.image.loa
 #Resize the image
 run_ani_R_scaled = []
 for i in run_ani_R:
-    k = pygame.transform.scale(i, (450, 250))
+    k = pygame.transform.scale(i, (180, 250))
     run_ani_R_scaled.append(k)
 
 # Run animation for the LEFT
@@ -126,7 +126,7 @@ run_ani_L = [pygame.image.load(f"Knight_0{num}__IDLE_000_L.png"), pygame.image.l
 #Resize the image
 run_ani_L_scaled = []
 for i in run_ani_L:
-    k = pygame.transform.scale(i, (450, 250))
+    k = pygame.transform.scale(i, (180, 250))
     run_ani_L_scaled.append(k)
 
 # Attack animation for the RIGHT
@@ -140,7 +140,7 @@ attack_ani_R = [pygame.image.load(f"Knight_0{num}__IDLE_000.png"), pygame.image.
 #Resize the image
 attack_ani_R_scaled = []
 for i in attack_ani_R:
-    k = pygame.transform.scale(i, (450, 250))
+    k = pygame.transform.scale(i, (180, 250))
     attack_ani_R_scaled.append(k)
 
 # Attack animation for the LEFT
@@ -153,7 +153,7 @@ attack_ani_L = [pygame.image.load(f"Knight_0{num}__IDLE_000_L.png"), pygame.imag
 #Resize the image
 attack_ani_L_scaled = []
 for i in attack_ani_L:
-    k = pygame.transform.scale(i, (450, 250))
+    k = pygame.transform.scale(i, (180, 250))
     attack_ani_L_scaled.append(k)
 
 # Jump animation for the right jump up
@@ -161,7 +161,7 @@ jump_ani_up = [pygame.image.load(f"Knight_0{num}__JUMP_007.png"), pygame.image.l
 #Resize the image
 jump_ani_up_scaled = []
 for i in jump_ani_up:
-    k = pygame.transform.scale(i, (450, 250))
+    k = pygame.transform.scale(i, (180, 250))
     jump_ani_up_scaled.append(k)
 
 # Jump animation for the left jump up
@@ -169,7 +169,7 @@ jump_ani_up_L = [pygame.image.load(f"Knight_0{num}__JUMP_007_L.png"), pygame.ima
 #Resize the image
 jump_ani_up_L_scaled = []
 for i in jump_ani_up_L:
-    k = pygame.transform.scale(i, (450, 250))
+    k = pygame.transform.scale(i, (180, 250))
     jump_ani_up_L_scaled.append(k)
 
 # Animations for the Health Bar
@@ -268,7 +268,7 @@ class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
         self.image = pygame.image.load(f"Knight_0{num}__IDLE_000.png")
-        self.image = pygame.transform.scale(self.image, (450, 250))
+        self.image = pygame.transform.scale(self.image, (180, 250))
         self.rect = self.image.get_rect()
 
         # Position and direction
