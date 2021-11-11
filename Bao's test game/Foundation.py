@@ -279,6 +279,7 @@ class Player(pygame.sprite.Sprite):
                     self.pos.y = lowest.rect.top + 1
                     self.vel.y = 0
                     self.jumping = False
+
     def player_hit(self):
         if self.cooldown == False:      
             self.cooldown = True # Enable the cooldown

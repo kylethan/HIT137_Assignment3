@@ -398,11 +398,9 @@ class Player(pygame.sprite.Sprite):
 
           if self.attack_frame == 0:
                 mmanager.playsound(swordtrack[self.slash], 0.05)
-                
                 self.slash += 1
                 if self.slash >= 2:
                       self.slash = 0
-
           # Check direction for correct animation to display  
           if self.direction == "RIGHT":
                  self.image = attack_ani_R[self.attack_frame]
@@ -1015,10 +1013,10 @@ while 1:
 
 
     # Player related functions
+    player.move()
     player.update()
     if player.attacking == True:
           player.attack() 
-    player.move()                
 
     # Display and Background related functions         
     background.render()
