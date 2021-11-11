@@ -182,7 +182,7 @@ health_ani = [pygame.image.load("heart0.png").convert_alpha(), pygame.image.load
 class Background(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        self.imgbg = pygame.image.load("map1background1.png")
+        self.imgbg = pygame.image.load("HomeBG.png")
         self.jumping = False
 
     def render(self):
@@ -367,11 +367,6 @@ class Player(pygame.sprite.Sprite):
         if self.move_frame > 10:
             self.move_frame = 0
             return
-
-
-
-
-
           
     def attack(self):
         # If attack frame has reached end of sequence, return to base frame
@@ -734,6 +729,8 @@ class EventHandler():
       
       def world1(self):
             self.root.destroy()
+            background.imgbg = pygame.image.load("Map1BG.png").convert_alpha()
+            ground.imgground = pygame.image.load("map1ground.png").convert_alpha()
             pygame.time.set_timer(self.enemy_generation, 2000)
             button.imgdisp = 1
             self.world = 1
@@ -745,8 +742,8 @@ class EventHandler():
 
       def world2(self):
             self.root.destroy()
-            background.bgimage = pygame.image.load("desert.jpg").convert_alpha()
-            ground.image = pygame.image.load("desert_ground.png").convert_alpha()
+            background.imgbg = pygame.image.load("Map2BG.png").convert_alpha()
+            ground.imgground = pygame.image.load("desert_ground.png").convert_alpha()
             pygame.time.set_timer(self.enemy_generation2, 2000)
             self.world = 2
             button.imgdisp = 1
@@ -758,6 +755,9 @@ class EventHandler():
 
       def world3(self):
             self.root.destroy()
+            background.imgbg = pygame.image.load("Map3BG.png").convert_alpha()
+            ground.imgground = pygame.image.load("desert_ground.png").convert_alpha()
+            pygame.time.set_timer(self.enemy_generation2, 2000)
             self.world = 3
             button.imgdisp = 1
             castle.hide = True
@@ -799,8 +799,8 @@ class EventHandler():
             
             # Bring back normal backgrounds
             castle.hide = False
-            background.bgimage = pygame.image.load("Background.png").convert_alpha()
-            ground.image = pygame.image.load("Ground.png").convert_alpha()
+            background.imgbg = pygame.image.load("HomeBG.png").convert_alpha()
+            ground.imgground = pygame.image.load("map1ground.png").convert_alpha()
 
       
 
