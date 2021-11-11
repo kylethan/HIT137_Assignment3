@@ -177,6 +177,7 @@ class Player(pygame.sprite.Sprite):
         self.jump_frame = 0
         #Combat:
         self.attacking = False
+        self.cooldown = False
         self.attack_frame = 0
 
     def move(self):
@@ -278,6 +279,13 @@ class Player(pygame.sprite.Sprite):
                     self.pos.y = lowest.rect.top + 1
                     self.vel.y = 0
                     self.jumping = False
+    def player_hit(self):
+        if self.cooldown == False:      
+            self.cooldown = True # Enable the cooldown
+            pygame.time.set_timer(hit_cooldown, 1000) # Resets cooldown in 1 second
+            
+            print("hit")
+            pygame.display.update()
 
 class Enemy(pygame.sprite.Sprite):
     def __init__(self):
@@ -314,27 +322,122 @@ class Enemy(pygame.sprite.Sprite):
  
         self.rect.center = self.pos # Updates rect
 
+    def update(self):
+      # Checks for collision with the Player
+      hits = pygame.sprite.spritecollide(self, Playergroup, False)
+ 
+      # Activates upon either of the two expressions being true
+      if hits and player.attacking == True:
+            self.kill()
+            #print("Enemy killed")
+ 
+      # If collision has occured and player not attacking, call "hit" function            
+      elif hits and player.attacking == False:
+            player.player_hit()
+
     def render(self):
         # Displayed the enemy on screen
         displaysurface.blit(self.image, (self.pos.x, self.pos.y))
 
+class Castle(pygame.sprite.Sprite):
+    def __init__(self):
+        super().__init__()
+        self.hide = False
+        self.image = pygame.image.load("castle.png")
+
+    def update(self):
+        if self.hide == False:
+                displaysurface.blit(self.image, (600, 290))
+    
+class EventHandler():
+    def __init__(self):
+        self.enemy_count = 0
+        self.battle = False
+        self.enemy_generation = pygame.USEREVENT + 1
+        self.stage = 1
+        self.stage_enemies = []
+        for x in range(1, 21):
+            self.stage_enemies.append(int((x ** 2 / 2) + 1))
+
+            
+    def stage_handler(self):
+        # Code for the Tkinter stage selection window
+        self.root = Tk()
+        self.root.geometry('200x170')
+            
+        button1 = Button(self.root, text = "Twilight Dungeon", width = 18, height = 2,
+                        command = self.world1)
+        button2 = Button(self.root, text = "Skyward Dungeon", width = 18, height = 2,
+                        command = self.world2)
+        button3 = Button(self.root, text = "Hell Dungeon", width = 18, height = 2,
+                        command = self.world3)
+            
+        button1.place(x = 40, y = 15)
+        button2.place(x = 40, y = 65)
+        button3.place(x = 40, y = 115)
+            
+        self.root.mainloop()
+
+    def world1(self):
+        
+        pygame.time.set_timer(self.enemy_generation, 2000)
+        castle.hide = True
+        self.battle = True
+
+    def world2(self):
+        self.battle = True
+        # Empty for now
+    
+    def world3(self):
+        self.battle = True    
+        # Empty for now
+
+    def next_stage(self):  # Code for when the next stage is clicked            
+        self.stage += 1
+        self.enemy_count = 0
+        print("Stage: "  + str(self.stage))
+        pygame.time.set_timer(self.enemy_generation, 1500 - (50 * self.stage))
 
 background = Background()
 ground = Ground()
 enemy = Enemy()
+
+Enemies = pygame.sprite.Group()
+
 ground_group = pygame.sprite.Group()
 ground_group.add(ground)
+
 player = Player()
+Playergroup = pygame.sprite.Group()
+Playergroup.add(player)
+
+castle = Castle()
+handler = EventHandler()
+
+hit_cooldown = pygame.USEREVENT + 1
 
 while game_start.waiting == False:
     for event in pygame.event.get():
+        if event.type == hit_cooldown:
+            player.cooldown = False
+            pygame.time.set_timer(hit_cooldown, 0)
         # Will run when the close window button is clicked
         if event.type == QUIT:
             pygame.quit()
             sys.exit()
+        if event.type == handler.enemy_generation:
+            if handler.enemy_count < handler.stage_enemies[handler.stage - 1]:
+                enemy = Enemy()
+                Enemies.add(enemy)
+                handler.enemy_count += 1
 
         # Event handling for a range of different key presses
         if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_n:
+                  if handler.battle == True and len(Enemies) == 0:
+                        handler.next_stage()
+            if event.key == pygame.K_e and 450 < player.rect.x < 550:
+                handler.world1()
             if event.key == pygame.K_UP:
                 player.jump()
             if event.key == pygame.K_SPACE:
@@ -349,9 +452,17 @@ while game_start.waiting == False:
     if player.attacking == True:
         player.attack()
     player.move()
+    castle.update()
     displaysurface.blit(player.image, player.rect)
-    enemy.render()
-    enemy.move()
+
+    # enemy.update()
+    # enemy.move()
+    # enemy.render()
+    for entity in Enemies:
+      entity.update()
+      entity.move()
+      entity.render()
+
     pygame.display.update()
     FPS_CLOCK.tick(FPS)
     player.gravity_check()
