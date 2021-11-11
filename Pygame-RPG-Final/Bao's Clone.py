@@ -240,7 +240,7 @@ class FireBall(pygame.sprite.Sprite):
                   self.image = pygame.image.load("fireball1_L.png") .convert_alpha()          
             self.rect = self.image.get_rect(center = player.pos)
             self.rect.x = player.pos.x
-            self.rect.y = player.pos.y - 40
+            self.rect.y = player.pos.y - 120
             
       def fire(self):
             player.magic_cooldown = 0
