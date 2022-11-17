@@ -984,7 +984,7 @@ while 1:
                         handler.next_stage()
                         stage_display = StageDisplay()
                         stage_display.display = True
-            if event.key == pygame.K_e and 450 < player.rect.x < 550:
+            if event.key == pygame.K_e and 630 < player.rect.x < 730:
                 handler.stage_handler()
             if event.key == pygame.K_UP:
                 player.jump()

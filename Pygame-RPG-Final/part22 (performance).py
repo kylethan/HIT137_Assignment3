@@ -729,9 +729,8 @@ class EventHandler():
                         #self.stage_enemies[i][j] = (int(   ( j ** 2/2 ) / 2 )  * (i + 1) + 1 )
 
             print(self.stage_enemies)
-
             
-            
+      
       def stage_handler(self):
             # Code for the Tkinter stage selection window
             self.root = Tk()
